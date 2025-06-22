@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "generative AI",
     "digital artwork",
   ],
-  authors: [{ name: "Waseem Anjum", url: "https://waseemanjum.vercel.app/" }],
+  authors: [{ name: "Waseem Anjum", url: "http://waseemanjum.com" }],
   creator: "Waseem Anjum",
   publisher: "Midjourney Bulk Generator",
   metadataBase: new URL("https://midjourney-bulk-generator.vercel.app/"),
@@ -97,7 +97,7 @@ export default function RootLayout({
                 Made with <span className="text-red-500 animate-pulse">❤️</span>{" "}
                 by{" "}
                 <a
-                  href="https://waseemanjum.vercel.app/"
+                  href="http://waseemanjum.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-foreground transition-colors duration-200"
