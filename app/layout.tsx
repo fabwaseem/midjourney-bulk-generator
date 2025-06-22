@@ -1,14 +1,13 @@
+import { Navbar } from "@/components/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { SettingsProvider } from "@/lib/settings-context";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sans = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
@@ -23,11 +22,65 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${sans.variable} gradient-bg font-sans antialiased min-h-screen flex flex-col`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SettingsProvider>
+            <Navbar />
+            <main className="p-4  flex-1">{children}</main>
+            <footer className="py-4 text-center text-sm text-muted-foreground">
+              <p className="flex items-center justify-center gap-2">
+                Made with <span className="text-red-500 animate-pulse">❤️</span>{" "}
+                by{" "}
+                <a
+                  href="https://waseemanjum.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-foreground transition-colors duration-200"
+                >
+                  Waseem Anjum
+                </a>
+              </p>
+            </footer>
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                // Define default options
+                duration: 5000,
+                style: {
+                  background: "var(--background)",
+                  color: "var(--foreground)",
+                  border: "1px solid var(--border)",
+                },
+                // Default options for specific types
+                success: {
+                  duration: 3000,
+                  iconTheme: {
+                    primary: "#10B981",
+                    secondary: "white",
+                  },
+                },
+                error: {
+                  duration: 4000,
+                  iconTheme: {
+                    primary: "#EF4444",
+                    secondary: "white",
+                  },
+                },
+                loading: {
+                  duration: Infinity,
+                },
+              }}
+            />
+          </SettingsProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
