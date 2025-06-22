@@ -1,6 +1,5 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import fs from "fs";
 import { NextResponse } from "next/server";
 
 const extractTitles = (data: any) => {
@@ -40,14 +39,7 @@ export async function POST(req: Request) {
     //  load in cheerio
     const $ = cheerio.load(response.data);
     const scriptTag = $("#image-detail-json").text();
-    // save the scriptTag to a file
-    fs.writeFileSync("scriptTag.json", scriptTag);
-    if (!scriptTag) {
-      return NextResponse.json(
-        { error: "Images not found on this page" },
-        { status: 404 }
-      );
-    }
+
 
     const data = JSON.parse(scriptTag || "{}");
     const titles = extractTitles(data);
